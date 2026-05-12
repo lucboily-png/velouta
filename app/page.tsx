@@ -1,4 +1,5 @@
 'use client'
+
 import { useEffect, useState } from 'react'
 
 export default function Home() {
@@ -20,16 +21,6 @@ export default function Home() {
 
   useEffect(() => {
     loadStatus()
-
-    fetch('/api/track-view', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        page: 'landing-chat',
-        userAgent: navigator.userAgent,
-      }),
-    })
-
     const interval = setInterval(loadStatus, 8000)
     return () => clearInterval(interval)
   }, [])
@@ -52,960 +43,243 @@ export default function Home() {
     window.location.href = data.url
   }
 
-  return (
-    <main
-      style={{
-        background:
-          'radial-gradient(circle at top right, #fff3f8, #fdeff2 45%, #f9edf5 100%)',
-        minHeight: '100vh',
-        color: '#2f2a2a',
-        fontFamily: 'Inter, sans-serif',
-      }}
-    >
-
-      {/* NAV */}
-      <div
-        style={{
-          position: 'absolute',
-          top: 20,
-          left: 0,
-          width: '100%',
-          display: 'flex',
-          justifyContent: 'center',
-          zIndex: 20,
-        }}
-      >
-        <div
-          style={{
-            width: '1200px',
-            padding: '0 20px',
-          }}
-        >
-          <img src="/images/logo.png" style={{ height: 140 }} />
-        </div>
-      </div>
-	
-      {/* HERO PREMIUM */}
-      <section
-        style={{
-          maxWidth: 1200,
-          margin: '0 auto',
-          padding: '130px 20px 80px',
-          display: 'grid',
-          gridTemplateColumns: '1.1fr 0.9fr',
-          gap: 50,
-          alignItems: 'center',
-        }}
-      >
-	  
-        <div>
-		
-          <div
-            style={{
-              display: 'inline-block',
-              background: 'rgba(139,94,131,0.08)',
-              color: '#8b5e83',
-              padding: '10px 16px',
-              borderRadius: 999,
-              fontSize: 12,
-              fontWeight: 700,
-              letterSpacing: '1px',
-              marginBottom: 5,
-            }}
-          >
-            CHAT EN DIRECT • EXPÉRIENCE PRIVÉE • DISCRÈTION À 100%
-          </div>
- <br /> <br />
- 
-  <h1
-            style={{
-              fontSize: 68,
-              lineHeight: 1.02,
-              marginBottom: 22,
-              fontFamily: 'Playfair Display, serif',
-              fontWeight: 700,
-            }}
-          >
-            Pour vous
-            <br />
-            Mesdames
-           
-          </h1>
-
-          <p
-            style={{
-              fontSize: 21,
-              lineHeight: 1.8,
-              color: '#5a4f4f',
-              maxWidth: 620,
-            }}
-          >
-            Bienvenue dans cet espace exclusif et confidentiel où je t'offre un moment pour décrocher, te sentir désirée,
-            écoutée… ou simplement profiter d’une présence. 
-          </p>
-		  
-		  <h2
-            style={{
-              fontSize: 30,
-              lineHeight: 1.02,
-              marginBottom: 22,
-              fontFamily: 'Playfair Display, serif',
-              fontWeight: 700,
-            }}
-			
-			>
-		  <br />
-            Connecte-toi !
-            <br />
-         
-          </h2>
-
-          <div
-            style={{
-              display: 'flex',
-              gap: 14,
-              flexWrap: 'wrap',
-              marginTop: 26,
-              fontSize: 14,
-              color: '#6d5d5d',
-            }}
-          >
-            <span>💬 Chat en direct</span>
-            <span>🔒 100% confidentiel</span>
-            <span>⚡ Accès immédiat</span>
-            <span>✨ Expérience premium</span>
-          </div>
-
-          <button
-            onClick={() =>
-              document
-                .getElementById('pricing')
-                ?.scrollIntoView({ behavior: 'smooth' })
-            }
-            style={{
-              marginTop: 34,
-              padding: '18px 30px',
-              borderRadius: 16,
-              border: 'none',
-              background:
-                'linear-gradient(135deg,#8b5e83,#6f4768,#9a6d92)',
-              color: 'white',
-              fontWeight: 700,
-              fontSize: 16,
-              cursor: 'pointer',
-              boxShadow: '0 18px 45px rgba(139,94,131,0.28)',
-            }}
-          >
-            Réserver mon moment privé ✨
-          </button>
-        </div>
-
-        {/* IMAGE BLOCK */}
-        <div
-          style={{
-            position: 'relative',
-            height: 700,
-            borderRadius: 34,
-            overflow: 'hidden',
-            boxShadow: '0 30px 80px rgba(0,0,0,0.16)',
-          }}
-        >
-          <img
-            src="/images/2.jpg"
-            style={{
-              width: '100%',
-              height: '100%',
-              objectFit: 'cover',
-            }}
-          />
-
-          <div
-            style={{
-              position: 'absolute',
-              inset: 0,
-              background:
-                'linear-gradient(to top, rgba(0,0,0,0.42), rgba(0,0,0,0.08))',
-            }}
-          />
-
-          <div
-            style={{
-              position: 'absolute',
-              left: 24,
-              bottom: 24,
-              background: 'rgba(255,255,255,0.94)',
-              padding: '14px 18px',
-              borderRadius: 18,
-              backdropFilter: 'blur(10px)',
-              fontSize: 14,
-              fontWeight: 600,
-            }}
-          >
-            {loadingStatus
-              ? 'Chargement...'
-              : isOnline
-              ? '🟢 Disponible maintenant'
-              : '🔴 Hors ligne actuellement'}
-          </div>
-        </div>
-      </section>
-	  
-	  
-
-      {/* EXPERIENCE STRIP */}
-<section
-  style={{
+  const container = {
     maxWidth: 1200,
     margin: '0 auto',
-    padding: '20px 20px 100px',
-  }}
->
-  <div
-    style={{
-      textAlign: 'center',
-      marginBottom: '50px',
-    }}
-  >
-    <p
-      style={{
-        color: '#8b5e83',
-        letterSpacing: '2px',
-        fontSize: '13px',
-        fontWeight: 700,
-        marginBottom: '12px',
-      }}
-    >
-      UNE EXPÉRIENCE PENSÉE POUR TOI
-    </p>
+    padding: 'clamp(20px, 4vw, 80px)',
+  }
 
-    <h2
-      style={{
-        fontSize: '46px',
-        lineHeight: '1.2',
-        fontFamily: 'Playfair Display, serif',
-        color: '#2f2a2a',
-      }}
-    >
+  return (
+    <main style={{ fontFamily: 'Inter, sans-serif', background: '#fff6f9' }}>
 
-       Plus qu’un simple échange.
-          <br />
-          Un moment qui t’appartient.
-        </h2>
+      {/* NAV */}
+      <nav style={{ ...container, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <img src="/images/logo.png" style={{ height: 'clamp(50px, 6vw, 110px)' }} />
 
-        <p
-          style={{
-            fontSize: 20,
-            color: '#5a4f4f',
-            lineHeight: 1.9,
-          }}
-        >
-		<br />
-          Ici, tout ralentit. Tu peux parler librement, flirter, te confier,
-          explorer ou simplement profiter d’une présence attentive.
-		  <br />
-          Chaque conversation est fluide, immersive et entièrement dédiée à toi.
-        </p>
-  </div>
-
-  <div
-    style={{
-      display: 'grid',
-      gridTemplateColumns: 'repeat(3,1fr)',
-      gap: '28px',
-    }}
-  >
-    {[
-      {
-        icon: '💬',
-        title: 'Une connexion réelle',
-        text: 'Une présence attentive, naturelle et entièrement centrée sur toi.',
-      },
-      {
-        icon: '✨',
-        title: 'Ambiance exclusive',
-        text: 'Une énergie douce, complice et parfois délicieusement sensuelle.',
-      },
-      {
-        icon: '🔒',
-        title: 'Discrétion absolue',
-        text: 'Des échanges privés, confidentiels et uniquement par texte.',
-      },
-    ].map((item, index) => (
-      <div
-        key={item.title}
-        style={{
-          position: 'relative',
-          overflow: 'hidden',
-          padding: '40px 34px',
-          borderRadius: '30px',
-          background:
-            index === 1
-              ? 'linear-gradient(135deg,#8b5e83,#b57fa9)'
-              : 'rgba(255,255,255,0.75)',
-          backdropFilter: 'blur(12px)',
-          boxShadow:
-            index === 1
-              ? '0 20px 50px rgba(139,94,131,0.28)'
-              : '0 20px 45px rgba(0,0,0,0.05)',
-          color: index === 1 ? 'white' : '#2f2a2a',
-          transform: index === 1 ? 'translateY(-10px)' : 'translateY(0)',
-        }}
-      >
-        {/* GLOW */}
-        <div
-          style={{
-            position: 'absolute',
-            top: '-80px',
-            right: '-80px',
-            width: '180px',
-            height: '180px',
-            borderRadius: '999px',
-            background:
-              index === 1
-                ? 'rgba(255,255,255,0.12)'
-                : 'rgba(181,127,169,0.08)',
-          }}
-        />
-		
-
-        {/* ICON */}
-        <div
-          style={{
-            width: '64px',
-            height: '64px',
-            borderRadius: '18px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            fontSize: '28px',
-            marginBottom: '24px',
-            background:
-              index === 1
-                ? 'rgba(255,255,255,0.16)'
-                : '#f7e8ee',
-          }}
-        >
-          {item.icon}
+        <div style={{
+          fontSize: 12,
+          display: 'flex',
+          alignItems: 'center',
+          gap: 8,
+          padding: '8px 12px',
+          borderRadius: 999,
+          background: isOnline ? '#e7f9ee' : '#fde7e7',
+        }}>
+          <span style={{
+            width: 8,
+            height: 8,
+            borderRadius: 999,
+            background: isOnline ? 'green' : 'red'
+          }} />
+          {loadingStatus ? '...' : isOnline ? 'En ligne' : 'Hors ligne'}
         </div>
+      </nav>
 
-        {/* TITLE */}
-        <h3
-          style={{
-            fontSize: '28px',
-            marginBottom: '16px',
-            fontFamily: 'Playfair Display, serif',
-            position: 'relative',
-            zIndex: 2,
-          }}
-        >
-          {item.title}
-        </h3>
+      {/* HERO */}
+      <section style={{
+        ...container,
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+        gap: '40px',
+        alignItems: 'center'
+      }}>
 
-        {/* TEXT */}
-        <p
-          style={{
-            lineHeight: '1.9',
-            fontSize: '16px',
-            color:
-              index === 1
-                ? 'rgba(255,255,255,0.92)'
-                : '#6d5d5d',
-            position: 'relative',
-            zIndex: 2,
-          }}
-        >
-          {item.text}
-        </p>
-      </div>
-    ))}
-  </div>
-</section>
+        <div>
 
-{/* ABOUT SECTION */}
-<section
-  style={{
-    maxWidth: '1200px',
-    margin: '0 auto',
-    padding: '40px 20px 120px',
-  }}
->
-  <div
-    style={{
-      display: 'grid',
-      gridTemplateColumns: '1fr 1fr',
-      gap: '50px',
-      alignItems: 'center',
-    }}
-  >
-    {/* IMAGE SIDE */}
-    <div
-      style={{
-        position: 'relative',
-      }}
-    >
-      {/* MAIN IMAGE PLACEHOLDER */}
-      <div
-  style={{
-    height: '620px',
-    borderRadius: '34px',
-    overflow: 'hidden',
-    boxShadow: '0 30px 70px rgba(0,0,0,0.10)',
-  }}
->
-  <img
-    src="images/about.jpg"
-    alt="Moment privé"
-    style={{
-      width: '100%',
-      height: '100%',
-      objectFit: 'cover',
-    }}
-  />
-</div>
-
-      {/* FLOATING CARD */}
-      <div
-        style={{
-          position: 'absolute',
-          bottom: '-30px',
-          right: '-20px',
-          width: '240px',
-          padding: '24px',
-          borderRadius: '24px',
-          background: 'rgba(255,255,255,0.88)',
-          backdropFilter: 'blur(14px)',
-          boxShadow: '0 20px 50px rgba(0,0,0,0.08)',
-        }}
-      >
-        <div
-          style={{
-            fontSize: '13px',
-            letterSpacing: '1px',
-            color: '#8b5e83',
-            fontWeight: 700,
-            marginBottom: '10px',
-          }}
-        >
-          EXPÉRIENCE PRIVÉE
-        </div>
-
-        <p
-          style={{
-            lineHeight: '1.7',
-            color: '#5d5050',
-            fontSize: '14px',
-          }}
-        >
-          Une présence réelle, attentive et entièrement dédiée à créer un moment unique.
-        </p>
-      </div>
-    </div>
-
-    {/* TEXT SIDE */}
-    <div>
-      <p
-        style={{
-          color: '#8b5e83',
-          fontWeight: 700,
-          letterSpacing: '2px',
-          fontSize: '13px',
-          marginBottom: '14px',
-        }}
-      >
-        UNE PRÉSENCE RÉELLE ✨
-      </p>
-
-      <h2
-        style={{
-          fontSize: '52px',
-          lineHeight: '1.15',
-          marginBottom: '28px',
-          fontFamily: 'Playfair Display, serif',
-          color: '#2f2a2a',
-        }}
-      >
-        Derrière chaque conversation,
-        <br />
-        il y a quelqu’un qui écoute vraiment.
-      </h2>
-
-      <p
-        style={{
-          fontSize: '18px',
-          lineHeight: '2',
-          color: '#5d5050',
-          marginBottom: '24px',
-        }}
-      >
-        J’ai créé cet espace pour t'offrir quelque chose de différent :
-        <br /><b>Une présence sans jugements.</b>
-      </p>
-
-      <p
-        style={{
-          fontSize: '18px',
-          lineHeight: '2',
-          color: '#5d5050',
-          marginBottom: '24px',
-        }}
-      >
-        Ici, tu peux simplement décrocher.
-        Parler librement.
-        Flirter.
-        Rire.
-        Ou juste profiter d’une présence agréable après une longue journée.
-      </p>
-
-      <p
-        style={{
-          fontSize: '18px',
-          lineHeight: '2',
-          color: '#5d5050',
-        }}
-      >
-        Chaque échange est différent.
-        Et c’est justement ce qui le rend spécial.
-      </p>
-
-      {/* QUOTE */}
-      <div
-        style={{
-          marginTop: '40px',
-          padding: '28px',
-          borderRadius: '28px',
-          background: 'linear-gradient(135deg,#fff3f6,#fdecef)',
-          border: '1px solid rgba(139,94,131,0.10)',
-        }}
-      >
-        <p
-          style={{
-            fontSize: '24px',
-            lineHeight: '1.7',
-            color: '#6d4e67',
-            fontFamily: 'Playfair Display, serif',
-            marginBottom: '14px',
-          }}
-        >
-          “Certains moments n’ont pas besoin d’être compliqués pour être mémorables.”
-        </p>
-
-        <p
-          style={{
-            fontSize: '14px',
-            color: '#8b5e83',
-            fontWeight: 700,
-            letterSpacing: '1px',
-          }}
-        >
-          — Noah B.
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
-
-      {/* PRICING */}
-<section
-  id="pricing"
-  style={{
-    maxWidth: 1280,
-    margin: '0 auto',
-    padding: '40px 20px 120px',
-    position: 'relative',
-  }}
->
-  {/* TOP HEADER */}
-  <div
-    style={{
-      textAlign: 'center',
-      marginBottom: '55px',
-    }}
-  >
-    <p
-      style={{
-        color: '#8b5e83',
-        letterSpacing: '2px',
-        fontWeight: 700,
-        fontSize: '13px',
-        marginBottom: '14px',
-      }}
-    >
-      MOMENTS PRIVÉS ✨
-    </p>
-
-    <h2
-      style={{
-        fontSize: '54px',
-        lineHeight: '1.15',
-        fontFamily: 'Playfair Display, serif',
-        color: '#2f2a2a',
-        marginBottom: '18px',
-      }}
-    >
-      Combien de temps
-      <br />
-      veux-tu qu’on s’évade ensemble ?
-    </h2>
-
-    <p
-      style={{
-        maxWidth: '720px',
-        margin: '0 auto',
-        color: '#6d5d5d',
-        fontSize: '18px',
-        lineHeight: '1.8',
-      }}
-    >
-      Chaque moment est pensé pour créer une connexion naturelle,
-      intime et totalement privée.
-    </p>
-  </div>
-
-  {/* CARDS */}
-  <div
-    style={{
-      display: 'grid',
-      gridTemplateColumns: 'repeat(3,1fr)',
-      gap: '30px',
-      alignItems: 'stretch',
-    }}
-  >
-    {[
-      {
-        title: 'Instant douceur',
-        time: '25 minutes',
-        price: '29$',
-        desc: 'Un moment léger et agréable pour décrocher du quotidien.',
-        plan: '25',
-      },
-      {
-        title: 'Moment privé',
-        time: '45 minutes',
-        price: '49$',
-        desc: 'Le parfait équilibre entre connexion, complicité et présence.',
-        plan: '45',
-        featured: true,
-      },
-      {
-        title: 'Connexion intense',
-        time: '60 minutes',
-        price: '69$',
-        desc: 'Prendre le temps de vivre une expérience plus profonde.',
-        plan: '60',
-      },
-    ].map((p) => (
-      <div
-        key={p.plan}
-        style={{
-          position: 'relative',
-          overflow: 'hidden',
-          borderRadius: '34px',
-          padding: '42px 34px',
-          background: p.featured
-            ? 'linear-gradient(180deg,#8b5e83,#6d4767)'
-            : 'rgba(255,255,255,0.82)',
-          color: p.featured ? 'white' : '#2f2a2a',
-          backdropFilter: 'blur(14px)',
-          boxShadow: p.featured
-            ? '0 35px 80px rgba(139,94,131,0.28)'
-            : '0 20px 45px rgba(0,0,0,0.06)',
-          transform: p.featured ? 'translateY(-10px)' : 'translateY(0)',
-          border: p.featured
-            ? '1px solid rgba(255,255,255,0.15)'
-            : '1px solid rgba(139,94,131,0.08)',
-        }}
-      >
-        {/* GLOW */}
-        <div
-          style={{
-            position: 'absolute',
-            top: '-100px',
-            right: '-100px',
-            width: '220px',
-            height: '220px',
-            borderRadius: '999px',
-            background: p.featured
-              ? 'rgba(255,255,255,0.08)'
-              : 'rgba(181,127,169,0.08)',
-          }}
-        />
-
-        {/* FEATURED TAG */}
-        {p.featured && (
-          <div
-            style={{
-              display: 'inline-block',
-              marginBottom: '22px',
-              padding: '8px 14px',
-              borderRadius: '999px',
-              background: 'rgba(255,255,255,0.12)',
-              fontSize: '12px',
-              fontWeight: 700,
-              letterSpacing: '1px',
-            }}
-          >
-            ✨ LE PLUS CHOISI
-          </div>
-        )}
-
-        {/* TITLE */}
-        <h3
-          style={{
-            fontSize: '32px',
-            fontFamily: 'Playfair Display, serif',
-            marginBottom: '8px',
-          }}
-        >
-          {p.title}
-        </h3>
-
-        {/* TIME */}
-        <p
-          style={{
-            opacity: 0.85,
-            fontSize: '16px',
-            marginBottom: '24px',
-          }}
-        >
-          {p.time}
-        </p>
-
-        {/* PRICE */}
-        <div
-          style={{
-            fontSize: '64px',
-            fontWeight: 700,
-            lineHeight: 1,
-            marginBottom: '24px',
-          }}
-        >
-          {p.price}
-        </div>
-
-        {/* DESC */}
-        <p
-          style={{
-            lineHeight: '1.9',
-            fontSize: '15px',
-            opacity: 0.92,
-            minHeight: '85px',
-          }}
-        >
-          {p.desc}
-        </p>
-
-        {/* FEATURES */}
-        <div
-          style={{
-            marginTop: '22px',
-            marginBottom: '30px',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '12px',
-            fontSize: '14px',
-          }}
-        >
-          <div>💬 Conversation privée</div>
-          <div>🔒 Discrétion totale</div>
-          <div>⚡ Accès immédiat</div>
-        </div>
-
-        {/* BUTTON */}
-        <button
-          onClick={() => checkout(p.plan)}
-          style={{
-            width: '100%',
-            padding: '18px',
-            borderRadius: '18px',
-            border: 'none',
-            background: p.featured
-              ? 'white'
-              : 'linear-gradient(135deg,#8b5e83,#6f4768)',
-            color: p.featured ? '#8b5e83' : 'white',
-            fontWeight: 700,
-            cursor: 'pointer',
-            fontSize: '16px',
-            boxShadow: p.featured
-              ? '0 10px 30px rgba(0,0,0,0.12)'
-              : '0 12px 30px rgba(139,94,131,0.18)',
-          }}
-        >
-          Réserver mon moment ✨
-        </button>
-
-        {/* FOOT */}
-        <p
-          style={{
-            marginTop: '16px',
-            fontSize: '12px',
-            opacity: 0.75,
-            textAlign: 'center',
-          }}
-        >
-          Messagerie texte privée uniquement
-        </p>
-		
-		<br / ><br / >
-		 <div
-            style={{
-              position: 'absolute',
-              right: 24,
-			  color: 'black',
-              bottom: 24,
-              background: 'rgba(255,255,255,255)',
-              padding: '10px 18px',
-              borderRadius: 18,
-              backdropFilter: 'blur(10px)',
-              fontSize: 14,
-              fontWeight: 600,
-            }}
-          >
-            {loadingStatus
-              ? 'Chargement...'
-              : isOnline
-              ? '🟢 Je suis en ligne'
-              : '🔴 Hors ligne'}
-          </div>
-      </div>
-	  
-    ))}
-  </div>
-  
-  
-
-  {/* BOTTOM TEXT */}
-  <div
-    style={{
-      textAlign: 'center',
-      marginTop: '34px',
-      color: '#8b5e83',
-      fontWeight: 600,
-      fontSize: '15px',
-    }}
-  >
-    💬 Quelques disponibilités seulement aujourd’hui
-  </div>
-</section>
-
-      {/* TRUST FOOTER */}
-      <footer
-        style={{
-          background:
-            'linear-gradient(to top,#ffffff,#faf5f8)',
-          padding: '65px 20px',
-          borderTop: '1px solid rgba(139,94,131,0.12)',
-        }}
-      >
-        <div
-          style={{
-            maxWidth: 900,
-            margin: '0 auto',
-            textAlign: 'center',
-          }}
-        >
-          <h3
-            style={{
-              fontSize: 28,
-              marginBottom: 16,
-              fontFamily: 'Playfair Display, serif',
-            }}
-          >
-            Discret. Raffiné. Entièrement privé.
-          </h3>
-
-          <p
-            style={{
-              color: '#5a4f4f',
-              lineHeight: 1.8,
-              fontSize: 16,
-              maxWidth: 700,
-              margin: '0 auto 24px',
-            }}
-          >
-            Chaque échange demeure confidentiel. Aucun jugement,
-            aucune pression, aucune exposition. Seulement un moment
-            exclusif pensé pour ton plaisir et ton bien-être.
+          <p style={{ fontSize: 12, letterSpacing: 2, color: '#8b5e83' }}>
+            CHAT PRIVÉ • CONFIDENTIEL
           </p>
 
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'center',
-              gap: 18,
-              flexWrap: 'wrap',
-              fontSize: 14,
-              color: '#7a6a6a',
-            }}
-          >
-            <span>🔒 Confidentialité totale</span>
-            <span>💬 Chat en direct</span>
-            <span>🛡️ Paiement sécurisé Stripe</span>
-            <span>✨ Expérience premium</span>
-          </div>
+          <h1 style={{
+            fontSize: 'clamp(32px, 5vw, 64px)',
+            lineHeight: 1.1,
+            marginTop: 10,
+            fontWeight: 700
+          }}>
+            Un espace simple<br />où tu peux parler
+          </h1>
 
-          <div
+          <p style={{
+            fontSize: 'clamp(15px, 2vw, 20px)',
+            color: '#5a4f4f',
+            lineHeight: 1.7,
+            marginTop: 20
+          }}>
+            Une conversation humaine, calme, sans jugement.
+          </p>
+
+          <button
+            onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })}
             style={{
-              marginTop: 32,
-              fontSize: 12,
-              color: '#9a8b8b',
+              marginTop: 25,
+              padding: '14px 20px',
+              width: '100%',
+              maxWidth: 320,
+              borderRadius: 14,
+              background: '#8b5e83',
+              color: 'white',
+              fontWeight: 600,
+              border: 'none'
             }}
           >
-            © 2026 — Expérience privée. Tous droits réservés.
+            Commencer
+          </button>
+
+        </div>
+
+        {/* IMAGE */}
+        <div style={{
+          position: 'relative',
+          borderRadius: 24,
+          overflow: 'hidden',
+          height: 'clamp(300px, 60vw, 600px)'
+        }}>
+          <img
+            src="/images/2.jpg"
+            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+          />
+
+          <div style={{
+            position: 'absolute',
+            bottom: 12,
+            left: 12,
+            background: 'rgba(255,255,255,0.9)',
+            padding: '8px 12px',
+            borderRadius: 12,
+            fontSize: 12
+          }}>
+            {isOnline ? '🟢 En ligne' : '🔴 Hors ligne'}
           </div>
         </div>
-      </footer>
 
-      {/* OFFLINE MODAL */}
+      </section>
+
+      {/* EXPERIENCE */}
+      <section style={{ ...container, textAlign: 'center' }}>
+
+        <h2 style={{
+          fontSize: 'clamp(24px, 4vw, 44px)',
+          fontFamily: 'serif'
+        }}>
+          Un moment pour toi
+        </h2>
+
+        <p style={{ color: '#666', marginTop: 10 }}>
+          Sans pression. Sans jugement.
+        </p>
+
+        <div style={{
+          marginTop: 40,
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+          gap: 20
+        }}>
+
+          {[
+            { t: 'Connexion', d: 'Conversation réelle' },
+            { t: 'Discrétion', d: '100% privé' },
+            { t: 'Présence', d: 'Écoute attentive' }
+          ].map(i => (
+            <div key={i.t} style={{
+              padding: 20,
+              borderRadius: 18,
+              background: '#fff',
+              boxShadow: '0 10px 30px rgba(0,0,0,0.05)'
+            }}>
+              <h3>{i.t}</h3>
+              <p style={{ fontSize: 13, color: '#666' }}>{i.d}</p>
+            </div>
+          ))}
+
+        </div>
+
+      </section>
+
+      {/* PRICING */}
+      <section id="pricing" style={container}>
+
+        <h2 style={{ textAlign: 'center', fontSize: 'clamp(26px, 4vw, 48px)' }}>
+          Choisis ton moment
+        </h2>
+
+        <div style={{
+          marginTop: 40,
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+          gap: 20
+        }}>
+
+          {[
+            { t: '25 min', p: '29$', id: '25' },
+            { t: '45 min', p: '49$', id: '45' },
+            { t: '60 min', p: '69$', id: '60' },
+          ].map(p => (
+            <div key={p.id} style={{
+              padding: 24,
+              borderRadius: 20,
+              background: '#fff',
+              textAlign: 'center'
+            }}>
+
+              <h3>{p.t}</h3>
+              <div style={{ fontSize: 32, fontWeight: 700 }}>{p.p}</div>
+
+              <button
+                onClick={() => checkout(p.id)}
+                style={{
+                  marginTop: 15,
+                  width: '100%',
+                  padding: 12,
+                  borderRadius: 12,
+                  background: '#8b5e83',
+                  color: 'white',
+                  border: 'none'
+                }}
+              >
+                Réserver
+              </button>
+
+            </div>
+          ))}
+
+        </div>
+
+      </section>
+
+      {/* MODAL */}
       {showOfflineModal && (
-        <div
-          onClick={() => setShowOfflineModal(false)}
-          style={{
-            position: 'fixed',
-            inset: 0,
-            background: 'rgba(0,0,0,0.65)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            zIndex: 999,
-          }}
-        >
-          <div
-            style={{
-              width: 360,
-              background: 'white',
-              borderRadius: 26,
-              padding: 34,
-              textAlign: 'center',
-            }}
-          >
-            <h3 style={{ fontSize: 24 }}>
-              Indisponible pour le moment 💬
-            </h3>
-
-            <p
-              style={{
-                fontSize: 15,
-                color: '#666',
-                lineHeight: 1.7,
-                marginTop: 10,
-              }}
-            >
-              Merci pour ton intérêt. Reviens un peu plus tard pour
-              vivre ton moment privé.
+        <div style={{
+          position: 'fixed',
+          inset: 0,
+          background: 'rgba(0,0,0,0.6)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: 20
+        }}>
+          <div style={{
+            background: 'white',
+            padding: 24,
+            borderRadius: 18,
+            maxWidth: 350,
+            width: '100%',
+            textAlign: 'center'
+          }}>
+            <h3>Hors ligne</h3>
+            <p style={{ fontSize: 14, color: '#666' }}>
+              Je ne suis pas disponible pour le moment.
             </p>
 
             <button
               onClick={() => setShowOfflineModal(false)}
               style={{
-                marginTop: 20,
+                marginTop: 15,
                 width: '100%',
-                padding: 14,
-                borderRadius: 14,
-                border: 'none',
+                padding: 12,
+                borderRadius: 12,
                 background: '#8b5e83',
                 color: 'white',
-                fontWeight: 700,
-                cursor: 'pointer',
+                border: 'none'
               }}
             >
               Fermer
@@ -1013,6 +287,7 @@ export default function Home() {
           </div>
         </div>
       )}
+
     </main>
   )
 }

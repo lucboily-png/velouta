@@ -1,11 +1,9 @@
-import type { Metadata } from 'next'
 import './globals.css'
-
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Inter&display=swap" rel="stylesheet" />
+import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Chaty',
-  description: 'Private chat',
+  title: 'Velouta',
+  description: 'Expérience privée premium',
 }
 
 export default function RootLayout({
@@ -15,9 +13,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="fr">
-      <body>
-        {children}
-      </body>
+      <body>{children}</body>
     </html>
   )
 }
