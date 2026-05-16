@@ -27,6 +27,20 @@ export default function Home() {
       setLoadingStatus(false)
     }
   }
+  
+  const checkout = async (plan: string) => {
+  const res = await fetch('/api/checkout', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ plan }),
+  })
+
+  const data = await res.json()
+
+  window.location.href = data.url
+}
 
   useEffect(() => {
     loadStatus()
@@ -65,29 +79,6 @@ export default function Home() {
     return () => clearInterval(interval)
   }, [])
 
-  /* STRIPE CHECKOUT */
-  const checkout = async (plan: string) => {
-    await loadStatus()
-
-    if (!isOnline) {
-      setShowOfflineModal(true)
-      return
-    }
-
-    const res = await fetch('/api/checkout', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        plan,
-      }),
-    })
-
-    const data = await res.json()
-
-    window.location.href = data.url
-  }
 
   const containerStyle = {
     maxWidth: 1200,
@@ -386,72 +377,56 @@ export default function Home() {
 <section
   style={{
     ...containerStyle,
-    paddingTop: 'clamp(40px, 8vw, 80px)',
-    paddingBottom: 'clamp(40px, 8vw, 90px)',
-    display: 'grid',
-    gridTemplateColumns:
-      'repeat(auto-fit, minmax(320px, 1fr))',
-    gap: 50,
-    alignItems: 'center',
+    paddingTop: 'clamp(60px, 10vw, 120px)',
+    paddingBottom: 'clamp(60px, 10vw, 120px)',
+    display: 'flex',
+    justifyContent: 'center',
   }}
 >
-  {/* IMAGE */}
   <div
     style={{
+      width: '100%',
+      maxWidth: 820,
       position: 'relative',
-      height: 'clamp(420px,65vw,760px)',
-      borderRadius: 34,
-      overflow: 'hidden',
-      boxShadow:
-        '0 30px 80px rgba(0,0,0,0.16)',
+      background: 'rgba(255,255,255,0.75)',
+      border: '1px solid rgba(0,0,0,0.06)',
+      borderRadius: 28,
+      padding: 'clamp(28px, 4vw, 56px)',
+      boxShadow: '0 30px 80px rgba(0,0,0,0.08)',
+      backdropFilter: 'blur(10px)',
     }}
   >
-    <img
-      src="/images/about.jpg"
-      style={{
-        width: '100%',
-        height: '100%',
-        objectFit: 'cover',
-      }}
-    />
-
-    {/* OVERLAY */}
+    {/* MORTAISE IMAGE */}
     <div
       style={{
         position: 'absolute',
-        inset: 0,
-        background:
-          'linear-gradient(to top, rgba(0,0,0,0.52), rgba(0,0,0,0.08))',
+        top: -30,
+        right: -30,
+        width: 110,
+        height: 110,
+        borderRadius: '50%',
+        overflow: 'hidden',
+        border: '4px solid white',
+        boxShadow: '0 20px 40px rgba(0,0,0,0.15)',
       }}
-    />
+    >
+      <img
+        src="/images/about.jpg"
+        alt="portrait"
+        style={{
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover',
+        }}
+      />
+    </div>
 
     {/* STATUS */}
     <div
       style={{
-        position: 'absolute',
-        left: 20,
-        bottom: 20,
-        background: 'rgba(255,255,255,0.95)',
-        padding: '14px 18px',
-        borderRadius: 18,
-        backdropFilter: 'blur(12px)',
-        fontSize: 14,
-        fontWeight: 700,
-      }}
-    >
-      {loadingStatus
-        ? 'Chargement...'
-        : isOnline
-        ? '🟢 Disponible maintenant'
-        : '🔴 Hors ligne'}
-    </div>
-  </div>
-
-  {/* TEXT */}
-  <div>
-    <div
-      style={{
-        display: 'inline-block',
+        display: 'inline-flex',
+        alignItems: 'center',
+        gap: 10,
         padding: '10px 16px',
         borderRadius: 999,
         background: 'rgba(139,94,131,0.08)',
@@ -461,74 +436,85 @@ export default function Home() {
         letterSpacing: 1,
       }}
     >
-      BIENVENUE DANS MON CHAT PRIVÉ 
+      {loadingStatus
+        ? '⏳ Chargement...'
+        : isOnline
+        ? '🟢 Disponible maintenant'
+        : '🔴 Hors ligne'}
     </div>
 
+    {/* TITLE */}
     <h1
       style={{
-        fontSize: 'clamp(38px, 7vw, 72px)',
-        lineHeight: 1.02,
-        marginTop: 24,
-        marginBottom: 24,
+        fontSize: 'clamp(42px, 6vw, 78px)',
+        lineHeight: 1.05,
+        marginTop: 28,
+        marginBottom: 20,
         fontFamily: 'Playfair Display, serif',
+        color: '#1f1a1a',
       }}
     >
-      Luca B.
+      Bienvenue dans mon Chat
     </h1>
 
+    {/* INTRO */}
     <p
       style={{
-        fontSize: 'clamp(16px,2vw,22px)',
+        fontSize: 'clamp(17px,2vw,22px)',
         lineHeight: 1.8,
-        color: '#5a4f4f',
-        maxWidth: 650,
+        color: '#4f4343',
+        maxWidth: 720,
       }}
     >
-      Charmeur, attentif et naturellement à l’écoute,
-      j'aime créer des conversations vraies,
-      légères, complices… et parfois un peu plus intenses.
+      Que tu aies envie d’une conversation légère, d’un peu de flirt ou 
+	  simplement d’une présence attentive, tout se fait naturellement, selon ton humeur et ton rythme.
     </p>
 
-    <p
+    {/* BODY */}
+    <div
       style={{
-        marginTop: 20,
-        color: '#7c6a6a',
-        lineHeight: 1.9,
-        fontSize: 16,
+        marginTop: 24,
+        display: 'grid',
+        gap: 14,
       }}
     >
-      Ici, aucun jugement.
-      Seulement un moment privé où tu peux
-      décrocher, rire, flirter ou simplement
-      profiter d’une présence agréable après une longue journée.
-    </p>
+      <p
+        style={{
+          color: '#6a5a5a',
+          lineHeight: 1.9,
+          fontSize: 16,
+        }}
+      >
+        Ici, tu peux décrocher du quotidien, discuter, rire, flirter légèrement ou simplement profiter d’une présence calme et attentive.
+      </p>
 
-    <p
-      style={{
-        marginTop: 18,
-        color: '#7c6a6a',
-        lineHeight: 1.9,
-        fontSize: 16,
-      }}
-    >
-      Chaque échange est discret,
-      naturel et entièrement à ton rythme.
-    </p>
+      <p
+        style={{
+          color: '#6a5a5a',
+          lineHeight: 1.9,
+          fontSize: 16,
+        }}
+      >
+        Tout se fait dans le respect, la discrétion et à ton rythme.
+		<br /><br />
+		Luca B.
+      </p>
+    </div>
 
     {/* TAGS */}
     <div
       style={{
         display: 'flex',
-        gap: 12,
         flexWrap: 'wrap',
-        marginTop: 30,
+        gap: 12,
+        marginTop: 32,
       }}
     >
       {[
         '💬 Chat en direct',
-        '🔒 100% confidentiel',
+        '🔒 Discrétion totale',
         '⚡ Réponse rapide',
-        '✨ Expérience premium',
+        '✨ Expérience personnalisée',
       ].map((tag) => (
         <div
           key={tag}
@@ -538,8 +524,8 @@ export default function Home() {
             borderRadius: 999,
             fontSize: 13,
             fontWeight: 600,
-            boxShadow:
-              '0 8px 20px rgba(0,0,0,0.04)',
+            border: '1px solid rgba(0,0,0,0.05)',
+            boxShadow: '0 6px 18px rgba(0,0,0,0.04)',
           }}
         >
           {tag}
@@ -550,27 +536,23 @@ export default function Home() {
     {/* BUTTON */}
     <button
       onClick={() =>
-        document
-          .getElementById('pricing')
-          ?.scrollIntoView({
-            behavior: 'smooth',
-          })
+        document.getElementById('pricing')?.scrollIntoView({
+          behavior: 'smooth',
+        })
       }
       style={{
-        marginTop: 36,
+        marginTop: 42,
         padding: '18px 28px',
         borderRadius: 18,
         border: 'none',
-        background:
-          'linear-gradient(135deg,#8b5e83,#6f4768,#9a6d92)',
+        background: 'linear-gradient(135deg,#8b5e83,#6f4768,#9a6d92)',
         color: 'white',
         fontWeight: 700,
         fontSize: 16,
         cursor: 'pointer',
         width: '100%',
-        maxWidth: 360,
-        boxShadow:
-          '0 20px 50px rgba(139,94,131,0.28)',
+        maxWidth: 380,
+        boxShadow: '0 20px 50px rgba(139,94,131,0.28)',
       }}
     >
       Commencer maintenant ✨

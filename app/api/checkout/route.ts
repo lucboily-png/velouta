@@ -35,8 +35,8 @@ export async function POST(req: Request) {
       },
     ],
 
-    success_url: 'http://localhost:3000/merci',
-    cancel_url: 'http://localhost:3000',
+    success_url: 'https://www.velouta.ca/merci',
+    cancel_url: 'https://www.velouta.ca/',
   })
 
   return Response.json({ url: session.url })
