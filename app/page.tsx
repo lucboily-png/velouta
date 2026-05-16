@@ -488,7 +488,7 @@ export default function Home() {
 		<br /><br />
 		Je suis un homme entre 30 et 50 ans, 6 pieds 2 pouces, 215 lbs, cheveux bruns un peu long, je me garde en forme donc assez musclé mais pas monsieur Univers non plus. 
 		<br /><br />
-		Si tu ne fais rien, que tu t'ennuie et que t'as envie de discuter, je t'invite à choisir ton moment un peu plus bas, on va  apprendre a se connaitre et on va certainement passer un bon moment à clavarder. 
+		Si tu ne fais rien, que tu t'ennuie et que t'as envie de discuter, je t'invite à choisir ton moment un peu plus bas, on va  apprendre à se connaitre et on va certainement passer un bon moment à clavarder. 
       </p>
 
       <p
@@ -1023,7 +1023,7 @@ export default function Home() {
           marginBottom: 14,
         }}
       >
-        “Parfois, il faut profiter du moment,
+        “Parfois, il faut profiter du moment présent,
         mettre un peu de piquant dans cette routine monotone.”
       </p>
 
@@ -1040,6 +1040,35 @@ export default function Home() {
       </div>
     </div>
   </div>
+   {/* BUTTON */}
+          <button
+            onClick={() =>
+              document
+                .getElementById('pricing')
+                ?.scrollIntoView({
+                  behavior: 'smooth',
+                })
+            }
+            style={{
+              marginTop: 34,
+              padding: '18px 28px',
+              borderRadius: 18,
+              border: 'none',
+              background:
+                'linear-gradient(135deg,#8b5e83,#6f4768,#9a6d92)',
+              color: 'white',
+              fontWeight: 700,
+              fontSize: 16,
+              cursor: 'pointer',
+              width: '100%',
+              maxWidth: 360,
+              boxShadow:
+                '0 20px 50px rgba(139,94,131,0.28)',
+            }}
+          >
+            Commencer maintenant ✨
+          </button>
+        
 </section>
 
       {/* FOOTER */}
