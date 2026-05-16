@@ -488,7 +488,7 @@ export default function Home() {
 		<br /><br />
 		Je suis un homme entre 30 et 50 ans, 6 pieds 2 pouces, 215 lbs, cheveux bruns un peu long, je me garde en forme donc assez musclé mais pas monsieur Univers non plus. 
 		<br /><br />
-		Si tu ne fais rie, que tu t'ennuie et que t'as envie de discuter, je t'invite à choisir ton moment un peu plus bas, on va  apprendre a se connaitre et on va certainement passer un bon moment à clavarder. 
+		Si tu ne fais rien, que tu t'ennuie et que t'as envie de discuter, je t'invite à choisir ton moment un peu plus bas, on va  apprendre a se connaitre et on va certainement passer un bon moment à clavarder. 
       </p>
 
       <p
@@ -810,6 +810,237 @@ export default function Home() {
           ))}
         </div>
       </section>
+	  
+	  {/* EXPERIENCE / EMOTIONAL SECTION */}
+<section
+  style={{
+    maxWidth: 1200,
+    margin: '0 auto',
+    padding: '20px 20px 120px',
+  }}
+>
+  <div
+    style={{
+      position: 'relative',
+      overflow: 'hidden',
+      borderRadius: 42,
+      padding: 'clamp(40px,7vw,90px)',
+      background:
+        'linear-gradient(135deg,#fff7fa 0%, #fdf1f5 50%, #fffafb 100%)',
+      boxShadow: '0 30px 90px rgba(0,0,0,0.06)',
+      border: '1px solid rgba(139,94,131,0.08)',
+    }}
+  >
+    {/* BACKGROUND GLOW */}
+    <div
+      style={{
+        position: 'absolute',
+        top: -120,
+        right: -120,
+        width: 320,
+        height: 320,
+        borderRadius: '999px',
+        background:
+          'radial-gradient(circle, rgba(181,127,169,0.18), transparent 70%)',
+      }}
+    />
+
+    {/* TOP LABEL */}
+    <div
+      style={{
+        display: 'inline-flex',
+        alignItems: 'center',
+        gap: 10,
+        padding: '12px 18px',
+        borderRadius: 999,
+        background: 'rgba(139,94,131,0.08)',
+        color: '#8b5e83',
+        fontSize: 12,
+        fontWeight: 700,
+        letterSpacing: 1.5,
+        textTransform: 'uppercase',
+      }}
+    >
+      ✨ Une expérience pensée pour toi
+    </div>
+
+    {/* TITLE */}
+    <h2
+      style={{
+        marginTop: 28,
+        marginBottom: 30,
+        fontSize: 'clamp(42px,7vw,82px)',
+        lineHeight: 0.98,
+        fontFamily: 'Playfair Display, serif',
+        color: '#2f2a2a',
+        maxWidth: 900,
+      }}
+    >
+      Plus qu’un simple chat.
+      <br />
+      Une parenthèse qui te fait du bien.
+    </h2>
+
+    {/* MAIN TEXT */}
+    <div
+      style={{
+        maxWidth: 760,
+      }}
+    >
+      <p
+        style={{
+          fontSize: 'clamp(18px,2vw,23px)',
+          lineHeight: 1.9,
+          color: '#5d5050',
+          marginBottom: 26,
+        }}
+      >
+        Ici, tout ralentit.
+        Tu peux enfin décrocher du bruit,
+        des responsabilités et des journées trop chargées.
+      </p>
+
+      <p
+        style={{
+          fontSize: 17,
+          lineHeight: 2,
+          color: '#746565',
+          marginBottom: 22,
+        }}
+      >
+        Chaque conversation est conçue pour te faire sentir désirée,
+        écoutée, valorisée… et complètement à l’aise d’être toi-même.
+      </p>
+
+      <p
+        style={{
+          fontSize: 17,
+          lineHeight: 2,
+          color: '#746565',
+        }}
+      >
+        Que tu recherches une présence rassurante,
+        une complicité légère,
+        un flirt assumé
+        ou simplement quelqu’un avec qui partager un vrai moment,
+        tout est à ton rythme.
+      </p>
+    </div>
+
+    {/* BENEFITS */}
+    <div
+      style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fit,minmax(240px,1fr))',
+        gap: 22,
+        marginTop: 50,
+      }}
+    >
+      {[
+        {
+          icon: '💫',
+          title: 'Retrouver une énergie légère',
+          text: 'Décrocher mentalement et vivre un moment qui fait réellement du bien.',
+        },
+        {
+          icon: '🔥',
+          title: 'Se sentir désirée',
+          text: 'Retrouver cette sensation agréable d’attention, de séduction et de connexion.',
+        },
+        {
+          icon: '🖤',
+          title: 'Parler sans filtre',
+          text: 'Exprimer librement tes pensées, tes envies ou simplement ton humeur du moment.',
+        },
+      ].map((item) => (
+        <div
+          key={item.title}
+          style={{
+            background: 'rgba(255,255,255,0.8)',
+            borderRadius: 30,
+            padding: '30px',
+            boxShadow: '0 15px 35px rgba(0,0,0,0.04)',
+          }}
+        >
+          <div
+            style={{
+              width: 64,
+              height: 64,
+              borderRadius: 20,
+              background: '#f7e8ee',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontSize: 28,
+              marginBottom: 20,
+            }}
+          >
+            {item.icon}
+          </div>
+
+          <h3
+            style={{
+              fontSize: 24,
+              marginBottom: 14,
+              color: '#2f2a2a',
+              fontFamily: 'Playfair Display, serif',
+            }}
+          >
+            {item.title}
+          </h3>
+
+          <p
+            style={{
+              color: '#6f6060',
+              lineHeight: 1.9,
+              fontSize: 15,
+            }}
+          >
+            {item.text}
+          </p>
+        </div>
+      ))}
+    </div>
+
+    {/* QUOTE */}
+    <div
+      style={{
+        marginTop: 55,
+        padding: '30px 34px',
+        borderRadius: 30,
+        background:
+          'linear-gradient(135deg,#fff2f6,#fde8ef)',
+        border: '1px solid rgba(139,94,131,0.08)',
+        maxWidth: 760,
+      }}
+    >
+      <p
+        style={{
+          fontSize: 'clamp(24px,3vw,34px)',
+          lineHeight: 1.6,
+          color: '#6d4e67',
+          fontFamily: 'Playfair Display, serif',
+          marginBottom: 14,
+        }}
+      >
+        “Parfois, il faut profiter du moment,
+        mettre un peu de piquant dans cette routine monotone.”
+      </p>
+
+      <div
+        style={{
+          fontSize: 13,
+          letterSpacing: 1.5,
+          color: '#8b5e83',
+          fontWeight: 700,
+          textTransform: 'uppercase',
+        }}
+      >
+        Expérience privée • 100% confidentielle
+      </div>
+    </div>
+  </div>
+</section>
 
       {/* FOOTER */}
       <footer
