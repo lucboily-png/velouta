@@ -454,7 +454,7 @@ export default function Home() {
         color: '#1f1a1a',
       }}
     >
-      Luca B.
+      Bienvenue dans mon Chat
     </h1>
 
     {/* INTRO */}
@@ -466,8 +466,7 @@ export default function Home() {
         maxWidth: 720,
       }}
     >
-      Que tu aies envie d’une conversation légère, d’un peu de flirt ou 
-	  simplement d’une présence attentive, tout se fait naturellement, selon ton humeur et ton rythme.
+      Que tu aies envie d’une conversation légère, d’un peu de flirt ou d'un moment encore plus intxxx, tout se fait naturellement, selon ton humeur et ton rythme.
     </p>
 
     {/* BODY */}
@@ -485,7 +484,11 @@ export default function Home() {
           fontSize: 16,
         }}
       >
-        Ici, tu peux décrocher du quotidien, discuter, rire, flirter légèrement ou simplement profiter d’une présence calme et attentive.
+        <u>Alors <b>Tu t'ennuie? </b> Allez, viens me rejoindre. On discute par clavardage, rien de plus!</u> 
+		<br /><br />
+		Je suis un homme entre 30 et 50 ans, 6 pieds 2 pouces, 215 lbs, cheveux bruns un peu long, je me garde en forme donc assez musclé mais pas monsieur Univers non plus. 
+		<br /><br />
+		Si tu ne fais rie, que tu t'ennuie et que t'as envie de discuter, je t'invite à choisir ton moment un peu plus bas, on va  apprendre a se connaitre et on va certainement passer un bon moment à clavarder. 
       </p>
 
       <p
@@ -498,6 +501,8 @@ export default function Home() {
         Tout se fait dans le respect, la discrétion et à ton rythme.
 		<br /><br />
 		Luca B.
+		<br />
+		<i>(Image à titre indicatif)</i>
       </p>
     </div>
 
